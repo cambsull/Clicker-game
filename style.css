@@ -1,0 +1,47 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: steelblue;
+}
+
+.display_container {
+    display: flex;
+
+}
+
+#increment-button {
+    width: 150px;
+    height: 150px;
+    background-color: green;
+    text-align: center;
+    margin-right: 10px;
+}
+
+#score-display {
+    width: 150px;
+    height: 150px;
+    background-color: rgb(182, 12, 173);
+    text-align: center;
+    margin-right: 10px;
+    padding-top: 40%;
+}
+
+#reset-score-button {
+    width: 150px;
+    height: 150px;
+    background-color: rgb(206, 6, 82);
+    text-align: center;
+    margin-right: 10px;
+}
+
+#buy-upgrade-button {
+    width: 150px;
+    height: 150px;
+    background-color: rgb(197, 185, 17);
+    text-align: center;
+    margin-right: 10px;
+}
