@@ -1,77 +1,83 @@
-const totalCount = document.getElementById("score-display");
+//VARIABLES
+
+//Global variables
 let count = 0;
-totalCount.innerHTML = "Score: " + count.toFixed(2);
-
-//const resetScoreButton = document.getElementById("reset-score-button");
-//resetScoreButton.innerHTML = "Reset score";
-
-const buyUpgradeButton = document.getElementById("buy-upgrade-button");
 let totalUpgrades = 0;
-let upgradePrice = 15;
-buyUpgradeButton.innerHTML = "Buy upgrade: " + totalUpgrades + "\n||\n" + upgradePrice;
-
+let upgradePrice = 10;
 const incrementCount = document.getElementById("increment-button");
+let clickStrength = (1 + (.25*totalUpgrades));
+let automaticStrength = (clickStrength**0.25);
+let isAutomaticallyUpgrading = false;
 
+//END VARIABLES
+
+//INITIALIZE
+
+//Display initial score on "click me!" button
+const totalCount = document.getElementById("increment-button");
+totalCount.innerHTML = "Click me!" + "<br><br>" + "Score: " + count.toFixed(2) + "<br><br>" + "Click power: " + "<br>" + clickStrength.toFixed(2);
+
+//Display initial upgrade count and total for Cost ugrade
+const buyUpgradeButton = document.getElementById("buy-upgrade-button");
+buyUpgradeButton.innerHTML = "Upgrades" + "<br><br>" + "Owned: " + totalUpgrades + "<br><br>" + "Cost: " + upgradePrice;
+
+//END INITIALIZE
+
+
+//LOGIC
+
+//Handle updating the increment from a manual click on the "click me!" button
 const handleIncrement = () => {
-    if (totalUpgrades === 0) {
-        count++;
-    } 
-    else {
-    count = (count + 1 + (1.25**totalUpgrades)); }
-    totalCount.innerHTML = "Score: " + count.toFixed(2);
+    count = (count + clickStrength);
+    totalCount.innerHTML = "Click me!" + "<br><br>" + "Score: " + count.toFixed(2) + "<br><br>" + "Click power: " + "<br>" + clickStrength.toFixed(2);
 }
 
-/*const resetScore = () => {
-    totalUpgrades = 0;
-    upgradePrice = 15;
-    count = 0;
-    buyUpgradeButton.innerHTML = "Buy upgrade: " + totalUpgrades + "\n||\n" + upgradePrice;
-    totalCount.innerHTML = "Score: " + count.toFixed(2);
-    endAutomaticIncrement();
-}*/
-
-
+//Handle updating the upgrade button
 const incrementUpgradePrice = () => {
-    totalCount.innerHTML = "Score: " + count.toFixed(2);
-    upgradePrice = (15 + (2**totalUpgrades));
-    buyUpgradeButton.innerHTML = "Buy upgrade: " + totalUpgrades + "\n||\n" + upgradePrice;
+    upgradePrice = (10 + (2**totalUpgrades));
+    buyUpgradeButton.innerHTML = "Upgrades" + "<br><br>" + "Owned: " + totalUpgrades + "<br><br>" + "Cost: " + upgradePrice + "<br><br>" + "Automatic power: " + "<br>" + automaticStrength.toFixed(2);
 }
 
+//Transact from the total score in order to buy upgrades
 const reduceCountByUpgradeCost = () => {
-    if (count - upgradePrice < 0) {
-        count = 0;
-    } else {
-        count = (count - upgradePrice);
-    }
-    totalCount.innerHTML = "Score: " + count.toFixed(2);
+    count = (count - upgradePrice);
+    totalCount.innerHTML = "Click me!" + "<br><br>" + "Score: " + count.toFixed(2) + "<br><br>" + "Click power: " + "<br>" + clickStrength.toFixed(2);
 }
-
+//Check to make sure the player can afford to upgrade. Update totalUpgrades, clickStrength, and automaticStrength variables. Call score related functions. 
 const buyUpgrade = () => {
     if (count >= upgradePrice) {
         totalUpgrades++;
-        incrementUpgradePrice();
+        clickStrength = (1 + (1.25**totalUpgrades));
+        automaticStrength = (clickStrength**0.25);
+        //Call reduceCountByUpgradeCost and incrementUpgradePrice in this order or else the score will reduce by the NEXT upgrade cost and not the current one
         reduceCountByUpgradeCost();
-        initiateAutomaticIncrement();        
+        incrementUpgradePrice();
+    }
+        
+    //Check to see if automatically incrementing. If not, enable it.
+    if (isAutomaticallyUpgrading === false) {
+        initiateAutomaticIncrement();
+        isAutomaticallyUpgrading = true;
     }
 }
 
-
+//Update score counter based on automatic interval
 const automaticallyIncrement = () => {
-    count = (count + 1 + (1.25**totalUpgrades)); 
-    totalCount.innerHTML = "Score: " + count.toFixed(2);
+    count = (count + (clickStrength**0.25)); 
+    totalCount.innerHTML = "Click me!" + "<br><br>" + "Score: " + count.toFixed(2) + "<br><br>" + "Click power: " + "<br>" + clickStrength.toFixed(2);
 }
 
-
+//Set automatic interval for updating score
 const initiateAutomaticIncrement = () => {
     setInterval(automaticallyIncrement, 1000); 
 }
 
 
-const endAutomaticIncrement = () => {
-    clearInterval(automaticallyIncrement);
-}
+//END LOGIC
 
+//EVENT HANDLERS
 
 incrementCount.addEventListener("click", handleIncrement);
-//resetScoreButton.addEventListener("click", resetScore);
 buyUpgradeButton.addEventListener("click", buyUpgrade);
+
+//END EVENT HANDLERS
