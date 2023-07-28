@@ -43,6 +43,7 @@ const reduceCountByUpgradeCost = () => {
     count = (count - upgradePrice);
     totalCount.innerHTML = "Click me!" + "<br><br>" + "Score: " + count.toFixed(2) + "<br><br>" + "Click power: " + "<br>" + clickStrength.toFixed(2);
 }
+
 //Check to make sure the player can afford to upgrade. Update totalUpgrades, clickStrength, and automaticStrength variables. Call score related functions. 
 const buyUpgrade = () => {
     if (count >= upgradePrice) {
@@ -71,7 +72,6 @@ const automaticallyIncrement = () => {
 const initiateAutomaticIncrement = () => {
     setInterval(automaticallyIncrement, 1000); 
 }
-
 
 //END LOGIC
 
