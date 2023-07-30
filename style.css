@@ -8,23 +8,52 @@ body {
     background-color: steelblue;
 }
 
-.display_container {
+.entire-display-area {
+    margin-top: 10%;
+    margin-left: 20%;
     display: flex;
+}
+
+.play-area-display-container {
+    display: flex;
+}
+
+.buildings-display-container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
 
 }
 
+
+.mode-selector-container {
+    display: flex;
+    justify-content: center;
+
+}
 #increment-button {
-    width: 150px;
-    height: 150px;
+    width: 450px;
+    height: 450px;
     background-color: green;
     text-align: center;
     margin-right: 10px;
+    
 }
 
-#buy-upgrade-button {
-    width: 150px;
+.building {
+    width: 225px;
     height: 150px;
     background-color: rgb(197, 185, 17);
     text-align: center;
     margin-right: 10px;
+    flex: 1 1 30%;
+}
+
+.mode-selector-button {
+    width: 225px;
+    height: 150px;
+    background-color: darkslateblue;
+    text-align: center;
+    flex: 1 1 30%;
 }

@@ -4,10 +4,10 @@
 let count = 0;
 let totalUpgrades = 0;
 let upgradePrice = 10;
-const incrementCount = document.getElementById("increment-button");
 let clickStrength = (1 + (.25*totalUpgrades));
 let automaticStrength = (clickStrength**0.25);
 let isAutomaticallyUpgrading = false;
+let idleMode = false;
 
 //END VARIABLES
 
@@ -18,7 +18,7 @@ const totalCount = document.getElementById("increment-button");
 totalCount.innerHTML = "Click me!" + "<br><br>" + "Score: " + count.toFixed(2) + "<br><br>" + "Click power: " + "<br>" + clickStrength.toFixed(2);
 
 //Display initial upgrade count and total for Cost ugrade
-const buyUpgradeButton = document.getElementById("buy-upgrade-button");
+const buyUpgradeButton = document.getElementById("building-one-button");
 buyUpgradeButton.innerHTML = "Upgrades" + "<br><br>" + "Owned: " + totalUpgrades + "<br><br>" + "Cost: " + upgradePrice;
 
 //END INITIALIZE
@@ -77,7 +77,7 @@ const initiateAutomaticIncrement = () => {
 
 //EVENT HANDLERS
 
-incrementCount.addEventListener("click", handleIncrement);
+totalCount.addEventListener("click", handleIncrement);
 buyUpgradeButton.addEventListener("click", buyUpgrade);
 
 //END EVENT HANDLERS
