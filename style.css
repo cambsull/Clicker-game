@@ -8,6 +8,11 @@ body {
     background-color: steelblue;
 }
 
+
+/*Desktop screens at 1080p*/
+
+@media only screen and (min-width: 1920px) {
+
 .entire-display-area {
     margin-top: 10%;
     margin-left: 20%;
@@ -55,3 +60,57 @@ body {
     text-align: center;
     flex: 1 1 30%;
 }
+}
+
+/* Mobile screens between 350 and 500 px */
+
+@media only screen and (min-width: 350px) and (max-width: 500px) {
+    .entire-display-area {
+        margin-top: 10%;
+        margin-left: 15%;
+        display: flex;
+    }
+    
+    .play-area-display-container {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+    }
+    
+    .buildings-display-container {
+        display: flex;
+        flex-wrap: wrap;
+        
+    }
+    
+    .mode-selector-container {
+        display: flex;
+ 
+    }
+    
+    #increment-button {
+        width: 20em;
+        height: 20em;
+        background-color: green;
+        text-align: center;
+    }
+    
+    .building {
+        width: 10em;
+        height: 10em;
+        background-color: rgb(197, 185, 17);
+        text-align: center;
+        margin-right: 2px;
+  }
+    
+    .mode-selector-button {
+        width: 20em;
+        height: 20em;
+        background-color: darkslateblue;
+        text-align: center;
+
+
+    }
+
+}
+
