@@ -23,22 +23,20 @@ body {
     flex-direction: column;
     flex-wrap: wrap;
     justify-content: center;
-
 }
 
 
 .mode-selector-container {
     display: flex;
     justify-content: center;
-
 }
+
 #increment-button {
     width: 450px;
     height: 450px;
     background-color: green;
     text-align: center;
     margin-right: 10px;
-    
 }
 
 .building {
