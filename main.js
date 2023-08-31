@@ -2,177 +2,89 @@
 let newGame = true; //Later, when saves are incorporated, will need to develop this further. For now every refresh is a new game.
 let totalUpgrades = 0;
 
-//INITIALIZE VARIABLES
-const countAtNewGame = () => {
-    if (newGame = true) {
-        return count = 0;
-    } else 
-    {
-        return count = null;
+
+//CLASS OBJECTS//
+
+const Building = class {
+    constructor (name, cost, owned, automaticPower) {
+        this.name = name;
+        this.cost = cost;
+        this.owned = owned; 
+        this.automaticPower = automaticPower;
     }
-}
-
-countAtNewGame();
-
-//OBJECTS//
-
-//Score counter
-/*const scoreCounter = {
-    scoreCount: count,
-    returnCount: function () {
-        return this.scoreCount;
+    displayStats() {
+        return this.name + "<br><br>" + "Owned: "+ this.owned + "<br>" + "Cost: " + this.cost.toFixed(2) + "<br>" + "Automatic power: " + this.automaticPower.toFixed(2);
     }
-}*/
-
-//Clickable play area object
-const clickablePlayArea = {
-    name: "Click Me!",
-    score: 0,
-    clickPower: 1,
-    initialize: function() {
-        return this.name + "<br><br>" + "Score: " + this.score + "<br><br>" + "Click Power: " + this.clickPower;
-    },
-    update: function() {
-        return this.name + "<br><br>" + "Score: " + this.score.toFixed(2) + "<br><br>" + "Click Power: " + this.clickPower.toFixed(2); 
-    }
-}
-
-//Building objects
-const buildingOne = {
-    name: "Building One",
-    owned: 0,
-    cost: 10,
-    automaticPower: 0,
-    initialize: function() {
-        return this.name + "<br><br>" + "Owned: "+ this.owned + "<br>" + "Cost: " + this.cost + "<br>" + "Automatic power: " + this.automaticPower;
-    },
-    checkCost: function() {
+    checkCost() {
         if (clickablePlayArea.score >= this.cost) {
             return true;
-        }
-    },
-    update: function() {
-        return this.name + "<br><br>" + "Owned: "+ this.owned + "<br>" + "Cost: " + this.cost + "<br>" + "Automatic power: " + this.automaticPower;
+        }    
+    }
+  
+    
+}
+
+const ClickablePlayArea = class {
+    constructor (name, score, clickPower) {
+        this.name = name;
+        this.score = score;
+        this.clickPower = clickPower;
+    
+    }
+    displayStats() {
+        return this.name + "<br><br>" + "Score: " + this.score.toFixed(2) + "<br><br>" + "Click Power: " + 
+        this.clickPower.toFixed(2) + "<br><br>" + "Total Auto Power: " 
+        + (buildingOne.automaticPower +
+           buildingTwo.automaticPower +
+           buildingThree.automaticPower + 
+           buildingFour.automaticPower +
+           buildingFive.automaticPower +
+           buildingSix.automaticPower).toFixed(2);
+        
     }
 }
 
-const buildingTwo = {
-    name: "Building Two",
-    owned: 0,
-    cost: 20,
-    automaticPower: 0,
-    initialize: function() {
-        return this.name + "<br><br>" + "Owned: "+ this.owned + "<br>" + "Cost: " + this.cost + "<br>" + "Automatic power: " + this.automaticPower;
-    },
-    checkCost: function() {
-        if (clickablePlayArea.score >= this.cost) {
-            return true;
-        }
-    },
-    update: function() {
-        return this.name + "<br><br>" + "Owned: "+ this.owned + "<br>" + "Cost: " + this.cost + "<br>" + "Automatic power: " + this.automaticPower;
-    }
-}
+//Instantiate class objects//
 
-const buildingThree = {
-    name: "Building Three",
-    owned: 0,
-    cost: 40,
-    automaticPower: 0,
-    initialize: function() {
-        return this.name + "<br><br>" + "Owned: "+ this.owned + "<br>" + "Cost: " + this.cost + "<br>" + "Automatic power: " + this.automaticPower;
-    },
-    checkCost: function() {
-        if (clickablePlayArea.score >= this.cost) {
-            return true;
-        }
-    },
-    update: function() {
-        return this.name + "<br><br>" + "Owned: "+ this.owned + "<br>" + "Cost: " + this.cost + "<br>" + "Automatic power: " + this.automaticPower;
-    }
-}
+//Buildings
+const buildingOne = new Building('Building One', 10, 0, 0);
+const buildingTwo = new Building('Building Two', 20, 0, 0);
+const buildingThree = new Building('Building Three', 40, 0, 0);
+const buildingFour = new Building('Building Four', 80, 0, 0);
+const buildingFive = new Building('Building Five', 160, 0, 0);
+const buildingSix = new Building('Building Six', 320, 0, 0);
 
-const buildingFour = {
-    name: "Building Four",
-    owned: 0,
-    cost: 80,
-    automaticPower: 0,
-    initialize: function() {
-        return this.name + "<br><br>" + "Owned: "+ this.owned + "<br>" + "Cost: " + this.cost + "<br>" + "Automatic power: " + this.automaticPower;
-    },
-    checkCost: function() {
-        if (clickablePlayArea.score >= this.cost) {
-            return true;
-        }
-    },
-    update: function() {
-        return this.name + "<br><br>" + "Owned: "+ this.owned + "<br>" + "Cost: " + this.cost + "<br>" + "Automatic power: " + this.automaticPower;
-    }
-}
+//Play area
+const clickablePlayArea = new ClickablePlayArea('Click me!', 0, 1);
 
 
-const buildingFive = {
-    name: "Building Five",
-    owned: 0,
-    cost: 160,
-    automaticPower: 0,
-    initialize: function() {
-        return this.name + "<br><br>" + "Owned: "+ this.owned + "<br>" + "Cost: " + this.cost + "<br>" + "Automatic power: " + this.automaticPower;
-    },
-    checkCost: function() {
-        if (clickablePlayArea.score >= this.cost) {
-            return true;
-        }
-    },
-    update: function() {
-        return this.name + "<br><br>" + "Owned: "+ this.owned + "<br>" + "Cost: " + this.cost + "<br>" + "Automatic power: " + this.automaticPower;
-    }
-}
 
-const buildingSix = {
-    name: "Building Six",
-    owned: 0,
-    cost: 320,
-    automaticPower: 0,
-    initialize: function() {
-        return this.name + "<br><br>" + "Owned: "+ this.owned + "<br>" + "Cost: " + this.cost + "<br>" + "Automatic power: " + this.automaticPower;
-    },
-    checkCost: function() {
-        if (clickablePlayArea.score >= this.cost) {
-            return true;
-        }
-    },
-    update: function() {
-        return this.name + "<br><br>" + "Owned: "+ this.owned + "<br>" + "Cost: " + this.cost + "<br>" + "Automatic power: " + this.automaticPower;
-    }
-}
-
-//END OBJECTS
+//END CLASS OBJECTS
 
 // INITIALIZE BUTTONS
 
 //Clickable play area button
 const clickablePlayAreaButton = document.getElementById("play-area-button");
-clickablePlayAreaButton.innerHTML = clickablePlayArea.initialize();
+clickablePlayAreaButton.innerHTML = clickablePlayArea.displayStats();
 
 //Buildings
 const buildingOneButton = document.getElementById("building-one-button");
-buildingOneButton.innerHTML = buildingOne.initialize();
+buildingOneButton.innerHTML = buildingOne.displayStats();
 
 const buildingTwoButton = document.getElementById("building-two-button");
-buildingTwoButton.innerHTML = buildingTwo.initialize();
+buildingTwoButton.innerHTML = buildingTwo.displayStats();
 
 const buildingThreeButton = document.getElementById("building-three-button");
-buildingThreeButton.innerHTML = buildingThree.initialize();
+buildingThreeButton.innerHTML = buildingThree.displayStats();
 
 const buildingFourButton = document.getElementById("building-four-button");
-buildingFourButton.innerHTML = buildingFour.initialize();
+buildingFourButton.innerHTML = buildingFour.displayStats();
 
 const buildingFiveButton = document.getElementById("building-five-button");
-buildingFiveButton.innerHTML = buildingFive.initialize();
+buildingFiveButton.innerHTML = buildingFive.displayStats();
 
 const buildingSixButton = document.getElementById("building-six-button");
-buildingSixButton.innerHTML = buildingSix.initialize();
+buildingSixButton.innerHTML = buildingSix.displayStats();
 
 //END INITIALIZE BUTTONS
 
@@ -180,7 +92,7 @@ buildingSixButton.innerHTML = buildingSix.initialize();
 
 //Update the clickable play area
 const updateClickablePlayArea = () => {
-    clickablePlayAreaButton.innerHTML = clickablePlayArea.update();
+    clickablePlayAreaButton.innerHTML = clickablePlayArea.displayStats();
 }
 
 //Handle the increment of the play area button when actively clicked.
@@ -200,10 +112,10 @@ const buyBuilding = (buildingNum, buildingNumButton) => {
     if (buildingNum.checkCost()) {
         transactScoreCounter(buildingNum);
         updateClickablePlayArea();
-        buildingNum.cost = (buildingNum.cost**1.25).toFixed(2);
+        buildingNum.cost = (buildingNum.cost**1.25)
         buildingNum.owned+=1;
-        buildingNum.automaticPower = (buildingNum.owned**1.1).toFixed(2);
-        buildingNumButton.innerHTML = buildingNum.update();
+        buildingNum.automaticPower = (buildingNum.owned**1.1);
+        buildingNumButton.innerHTML = buildingNum.displayStats();
         totalUpgrades++;
         checkForAutomaticIncrement();
         clickablePlayArea.clickPower = 1 + totalUpgrades**.05;
@@ -223,8 +135,8 @@ const checkForAutomaticIncrement = () => {
 
 //Start an automatic interval once a building is purchased to continually increase the score
 const automaticallyIncrement = () => {
-    clickablePlayArea.score += (buildingOne.owned*1 + buildingTwo.owned*2 + buildingThree.owned*3 + buildingFour.owned*4 + buildingFive.owned*5 + buildingSix.owned*6); 
-    updateClickablePlayArea();
+   clickablePlayArea.score += (buildingOne.automaticPower + buildingTwo.automaticPower + buildingThree.automaticPower + buildingFour.automaticPower + buildingFive.automaticPower + buildingSix.automaticPower); 
+   updateClickablePlayArea();
 }
 //END LOGIC
 
